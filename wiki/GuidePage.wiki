@@ -17,6 +17,6 @@ _SG0809 это проект ГОУ ВПО КГТЭИ
 
  * Наталья
 
- Software
+ [Software]
 
  GuidePage
