@@ -8,8 +8,8 @@ exec tclsh "$0"  ${1+"$@"}
 # Usage:
 #	tclsh arstan.tcl -1
 #	ilynva@mail.ru
-#	12.11.2008
-#
+#	21.11.2008
+#       Кодировка теперь Юникод
 
 # This is required to declare that we will use Expect
 package require Expect
