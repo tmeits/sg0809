@@ -2,13 +2,14 @@
 
 = Введение =
 
-Add your content here.
+SG0809 это проект ГОУ ВПО КГТЭИ
 
 
-= Details =
+= Детали =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
-  * GuidePage
+Участники проекта
+
+* Владимир Шишов
+* Игорь Кручек
+* Виктор Ильин
+* Наталья
