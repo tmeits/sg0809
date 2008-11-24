@@ -22,7 +22,7 @@ puts "HTTP/1.0 200 OK
 Content-Type: text/html; charset=windows-1251
 Expires: 0
 Pragma: no-cache\n"
-puts "<h1>Выполняется s-arstan.cgi</h1>"
+puts "<h1>Выполняется sg0809-d1.tcl</h1>"
 puts "<pre>$errorInfo</pre>"
 puts "Печатем авто-путь (нужно для отладки)<br>"
 puts $auto_path
