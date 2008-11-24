@@ -9,7 +9,8 @@ Tcl Web Server
 Дата: 10/4/00.
 
 Описание: надежный веб-сервер, который хорошо стыкуется со скриптами и open-source ПО.
-Download: http://dev.scriptics.com/software/tclhttpd/#download
+
+Download: http://wiki.tcl.tk/2085
 Платформы: Unix, Linux, Windows NT, Macintosh.
 Статус: бесплатный.
 
