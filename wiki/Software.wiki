@@ -8,6 +8,10 @@ Add your content here.
 = Детали =
 
  * ToolCommandLanguage
+ * [Expect]
+ * TclWebServer
+ * [PostgreSQL]
+
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
