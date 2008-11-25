@@ -41,7 +41,9 @@ if ![catch {exec cmd.exe /c del {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\zz*.*}}]
 #
 puts "<h4>Расчет выполняется c данными $cgi(p1), $cgi(p2), $cgi(p1), $cgi(p2), $cgi(vp)!!!! Ждите!</h4>"
 
-set copydatafile {C:\TCLHTTPD3.5.1\htdocs\sd0809\arstan\dat\russ190.rwl}
+set copydatafile1 {C:\TCLHTTPD3.5.1\htdocs\sd0809\arstan\dat}
+set copydatafile2 "$cgi(vp)"
+set copydatafile "$copydatafile1\\$copydatafile2"
 puts $copydatafile
 
 #Копируем файл данных
