@@ -38,6 +38,19 @@ if ![catch {exec cmd.exe /c del {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\zz*.*}}]
  puts "<br> Удалять нечего!\n"
 }
 
+#
+puts "<h4>Расчет выполняется c данными $cgi(p1), $cgi(p2), $cgi(p1), $cgi(p2), $cgi(vp)!!!! Ждите!</h4>"
+
+set copydatafile {C:\TCLHTTPD3.5.1\htdocs\sd0809\arstan\dat\russ190.rwl}
+puts $copydatafile
+
+#Копируем файл данных
+if ![catch {exec cmd.exe /c copy /y /a $copydatafile {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\sg0809-dd.rwl}}] {
+ puts "<br>Файл данных $cgi(vp) подготовлен для расчета...\n"
+} else {
+ puts "<br> Ошибка копирования файла $cgi(vp)!\n"
+}
+
 exec tclsh.exe {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\arstan.tcl}
 
 exec cmd.exe /c copy /y /a {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\ilynva*.*} {C:\TCLHTTPD3.5.1\htdocs\sd0809\arstan\rez\*.*}

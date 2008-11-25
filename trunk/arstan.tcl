@@ -16,7 +16,7 @@ package require Expect
 
 #Правила использования скрипта
 #В дальнейшем через параметры предполагается управлять генерацией выходного файла
-#set yux [lindex $argv 0]
+#set arstan [lindex $argv 0]
 #if {![string is integer -strict $yux] && $yux ne "-myarg"} {
  #   puts stderr "usage: $argv0 <argument> | -myarg"
  #   exit 1
@@ -36,7 +36,7 @@ spawn  {c:\shishov\ARSTAN.EXE}
 expect {"=>"}
 send "ilynva\r"
 expect {"=>"}
-send "russ001.rwl\r"
+send "sg0809-dd.rwl\r"
 expect {"=>"}
 send "\r"
 expect {"=>"}
