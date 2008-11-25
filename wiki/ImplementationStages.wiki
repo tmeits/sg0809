@@ -2,7 +2,8 @@
 
 = Введение =
 
-http://hurricane.ncdc.noaa.gov/pls/paleo/fm_createpages.treering
+ * http://hurricane.ncdc.noaa.gov/pls/paleo/fm_createpages.treering
+ * http://www.ldeo.columbia.edu/res/fac/trl/public/publicSoftware.html
 
 
 = Детали =
