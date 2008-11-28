@@ -7,7 +7,7 @@ exec tclsh "$0"  ${1+"$@"}
 #
 # Usage:
 #	tclsh s-arstan.tcl
-#	ilynva@mail.ru
+#	ilynva@ на гугле
 #	12.11.2008
 #
 
@@ -38,19 +38,20 @@ if ![catch {exec cmd.exe /c del {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\zz*.*}}]
  puts "<br> Удалять нечего!\n"
 }
 
-#
-puts "<h4>Расчет выполняется c данными $cgi(p1), $cgi(p2), $cgi(p1), $cgi(p2), $cgi(vp)!!!! Ждите!</h4>"
+#На данный момент выбор файла пользователя представлен сриском из которого он делает выбор
+
+puts "<h4>Расчет выполняется c данными $cgi(vpl)!!!! Ждите!</h4>"
 
 set copydatafile1 {C:\TCLHTTPD3.5.1\htdocs\sd0809\arstan\dat}
-set copydatafile2 "$cgi(vp)"
+set copydatafile2 "$cgi(vpl)"
 set copydatafile "$copydatafile1\\$copydatafile2"
 puts $copydatafile
 
 #Копируем файл данных
 if ![catch {exec cmd.exe /c copy /y /a $copydatafile {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\sg0809-dd.rwl}}] {
- puts "<br>Файл данных $cgi(vp) подготовлен для расчета...\n"
+ puts "<br>Файл данных $cgi(vpl) подготовлен для расчета...\n"
 } else {
- puts "<br> Ошибка копирования файла $cgi(vp)!\n"
+ puts "<br> Ошибка копирования файла $cgi(vpl)!\n"
 }
 
 exec tclsh.exe {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\arstan.tcl}
@@ -68,7 +69,19 @@ if ![catch {exec cmd.exe /c del {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\zz*.*}}]
  puts "<br> Удалять нечего!\n"
 }
 
-puts "<br> Выполнение успешно завершенно!!!\n<br><hr>"
+puts "<br><h4> Выполнение успешно завершенно!!!</h4>\n<br><hr>"
+# Копируем файл данных для yux.exec
+set copydatafileyux {C:\TCLHTTPD3.5.1\htdocs\sd0809\arstan\rez\ilynvars.crn}
+if ![catch {exec cmd.exe /c copy /y /a $copydatafileyux {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan}}] {
+ puts "<br>Файл данных ilynvars.crn подготовлен для расчета программой YUX...\n"
+} else {
+ puts "<br> Ошибка копирования файла ilynvars.crn !\n"
+}
+
+puts "<FORM ACTION=http://192.168.10.3:8015/cgi-bin/arstan/s-yux.tcl METHOD=POST>"
+puts "<INPUT TYPE=\"submit\" NAME=\"calcyux\" VALUE=\"Провести расчет YUX\">"
+puts "</FORM>"
+puts "<hr>"
 puts "<br><a href='http://192.168.10.3:8015/sd0809/arstan/rez/'>Загрузить результат</a>\n"
 puts "<br><a href='http://192.168.10.3:8015/sd0809/arstan/arstan.html'>Повторить</a>\n"
 #flush ""
