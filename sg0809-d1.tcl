@@ -22,10 +22,12 @@ puts "HTTP/1.0 200 OK
 Content-Type: text/html; charset=windows-1251
 Expires: 0
 Pragma: no-cache\n"
+
 puts "<h1>Выполняется sg0809-d1.tcl</h1>"
 puts "<pre>$errorInfo</pre>"
 puts "Печатем авто-путь (нужно для отладки)<br>"
 puts $auto_path
+
 # Удаляем файлы результатов предыдущих запусков скрипта 
 if ![catch {exec cmd.exe /c del {C:\TCLHTTPD3.5.1\htdocs\arstan\rez\ilynva*.*}}] {
   puts "<br>OK\n"
@@ -54,7 +56,7 @@ if ![catch {exec cmd.exe /c copy /y /a $copydatafile {C:\TCLHTTPD3.5.1\htdocs\cg
  puts "<br> Ошибка копирования файла $cgi(vpl)!\n"
 }
 
-exec tclsh.exe {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\arstan.tcl}
+exec tclsh.exe {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\arstan.tcl} 1 sg0809-dd.rwl
 
 exec cmd.exe /c copy /y /a {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\ilynva*.*} {C:\TCLHTTPD3.5.1\htdocs\sd0809\arstan\rez\*.*}
 
