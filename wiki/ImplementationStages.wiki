@@ -12,3 +12,6 @@
 
  * http://hurricane.ncdc.noaa.gov/pls/paleo/fm_createpages.treering
  * http://www.ldeo.columbia.edu/res/fac/trl/public/publicSoftware.html
+
+= Книги =
+ * http://books.google.ru/books?id=8BLVvUZ25CAC&pg=PA167&lpg=PA167&dq=случайные+числа+tcl&source=web&ots=ytHd1qOBEd&sig=zlPnxa5YbhjVshZeTF3oMsVsELI&hl=ru&sa=X&oi=book_result&resnum=7&ct=result
