@@ -13,18 +13,7 @@ exec tclsh "$0"  ${1+"$@"}
 
 # Моделируем базу данных с помощью массива
 # Это нужно вынести в отдельный файл
-
-#CREATE TABLE proba (
-#    "FILE" text,
-#    "SITE NAME" text,
-#    "ALT" text,
-#    "NORTH" text,
-#    "EAST" text,
-#    "START" integer,
-#    "END" integer,
-#    "SPECIES" text
-#);
-# INSERT INTO proba VALUES ('Russ001.rwl', 'Polar-Urals', '-999', '66.00', '65.00', 1541, 1968, 'LASI');
+# 
 
 proc Proba_AddRecord {ID File Site Alt North East Start End Species} {
 global  probaID probaFile probaSite probaAlt probaNorth probaEast probaStart probaEnd probaSpecies
@@ -54,9 +43,50 @@ proc Proba_ID {File} {
    global probaID
    return $probaID($File)
 }
-# Таким макаром нужно вставить весь файл подготовленный для базы данных
+# Количество элементов в массиве
+proc Proba_Index_Puts {} {
+   global probaID
+   set tmp1 [array size probaID]
+   #puts $tmp1
+   return $tmp1
+}
 
-Proba_AddRecord 1 Russ001.rwl Polar-Urals -999 66.00 65.00 1541 1968 LASI
+# Элемент NORTH
+proc Proba_Get_North {ID} {
+   global probaNorth
+   return $probaNorth($ID)
+}
+
+# Элемент East
+proc Proba_Get_East {ID} {
+   global probaEast
+   return $probaEast($ID)
+}
+
+# Элемент East
+proc Proba_Get_Alt {ID} {
+   global probaAlt
+   return $probaAlt($ID)
+}
+# Таким макаром нужно вставить весь файл подготовленный для базы данных
+#CREATE TABLE proba (
+#    "FILE" text,
+#    "SITE NAME" text,
+#    "ALT" text,
+#    "NORTH" text,
+#    "EAST" text,
+#    "START" integer,
+#    "END" integer,
+#    "SPECIES" text
+#);
+# INSERT INTO proba VALUES ('Russ001.rwl', 'Polar-Urals', '-999', '66.00', '65.00', 1541, 1968, 'LASI');
+# INSERT INTO proba VALUES ('BOL.rwl', NULL, '450', '66.30', '165.40', 1407, 1991, 'LADA');
+
+#Proba_AddRecord 1 Russ001.rwl Polar-Urals -999 66.00 65.00  1541 1968 LASI
+#Proba_AddRecord 2 BOL.rwl     NULL         450 66.30 165.40 1407 1991 LADA
+
+source probadb.tcl
+
 
 #puts "*** Proba_File_ID [Proba_File_ID 1]"
 #puts "*** Proba_File [Proba_File \"Russ001.rwl\"]"
@@ -92,23 +122,45 @@ if { $cgi(mr)==0 } {
 } else {
  puts "расчет по УЧАСТКАМ<p>" 
 }
+
+#Proba_Index_Puts
+#puts "[Proba_Index_Puts]"
+#puts "[Proba_Get_North 2]"
+#puts "[Proba_Get_East 1]"
+#puts "size= $s111"
+
 puts "<FORM ACTION=\"/cgi-bin/arstan/sg0809-d1.tcl\" METHOD=\"POST\">"
 #Получаем список файлов, которые соответсвуют координатам
 
 set coord-file-list [cfl]
 set rnd1 [expr rand()]
-
+# Определяем количество элементов (вдруг все попадут в выбор)
+set for_count [Proba_Index_Puts]
 # Создаем таблицу ассоциирующую координаты с именами файлов с данными
+
 puts "<table border = '1'> "
-for {set x 0} {$x<10} {incr x} {
-    puts "<tr> <td>russ190.rwl</td>  <td>[expr rand()]</td> <td>[expr rand()]</td></tr>"
+for {set x 1} {$x<=$for_count} {incr x} {
+   if { $cgi(p1) >= [Proba_Get_North $x]  } {
+      if { $cgi(p2) <= [Proba_Get_East $x]  } {
+         # Вывалим имя файла и остальное
+         puts "<tr>"
+         puts "<td>[Proba_File_ID $x]</td>"
+         puts "<td>[Proba_Get_North $x]</td>"
+         puts "<td>[Proba_Get_East $x]</td>"
+         puts "<td>[Proba_Get_Alt $x]</td>"
+         #puts "<tr> <td>russ190.rwl</td>  <td>[expr rand()]</td> <td>[expr rand()]</td></tr>"
+         puts "</tr>"
+         }
+    } 
+    #else { puts "Нет данных для расчета из вашего диапазона" }
 }
 puts "</table><p>"
 
 # Создаем список с именами файлов с данными
+puts "В ваш выбор попали несколько файлов - выберите один из списка.<p>"
 puts "<select name='vpl' > "
-for {set x 0} {$x<10} {incr x} {
-    puts "<option> russ190.rwl"
+for {set x 1} {$x<=$for_count} {incr x} {
+    puts "<option> [Proba_File_ID $x]"
 }
 puts "</select>"
 puts "<p>"
