@@ -63,10 +63,26 @@ proc Proba_Get_East {ID} {
    return $probaEast($ID)
 }
 
-# Элемент East
+# Элемент Alt
 proc Proba_Get_Alt {ID} {
    global probaAlt
    return $probaAlt($ID)
+}
+
+# Проверка попадания числа в диапазон
+proc checking_falling_numbers_in_the_range { d1 d2 p1 p11 p2 p22 } {
+set boolean_data_ret 0
+#puts "***"
+if { $d1 >= $p1 } {
+      if { $d1 <= $p11 } {
+         if { $d2 >= $p2 } {
+            if { $d2 <= $p22 } {
+               set boolean_data_ret  1
+            }
+         }
+      }
+   } 
+   return $boolean_data_ret
 }
 # Таким макаром нужно вставить весь файл подготовленный для базы данных
 #CREATE TABLE proba (
@@ -116,57 +132,72 @@ puts "<hr>"
 #puts "<INPUT TYPE=\"submit\" NAME=\"uchastok\" VALUE=\"Провести расчет по УЧАСТКАМ\">" 
 #puts "<INPUT TYPE=\"submit\" NAME=\"proba\" VALUE=\"Провести расчет по ПРОБАМ\"><p>"
 
-puts "<b>Расчет выполняется c данными</b> СЕВЕР:$cgi(p1), ВОСТОК:$cgi(p2), ВЫСОТА:$cgi(p3), "
+puts "<b>Расчет выполняется c данными:</b> <br>СЕВЕР1:$cgi(p1), СЕВЕР2:$cgi(p11), ВОСТОК1:$cgi(p2), ВОСТОК2:$cgi(p22), ВЫСОТА:$cgi(p3)<br> "
 if { $cgi(mr)==0 } { 
- puts "расчет по ПРОБАМ<p>" 
-} else {
- puts "расчет по УЧАСТКАМ<p>" 
-}
+   puts "расчет по ПРОБАМ<p>" 
+   #puts "[Proba_Index_Puts]"
+   #puts "[Proba_Index_Puts]"
+   #puts "[Proba_Get_North 2]"
+   #puts "[Proba_Get_East 1]"
+   #puts "size= $s111"
 
-#Proba_Index_Puts
-#puts "[Proba_Index_Puts]"
-#puts "[Proba_Get_North 2]"
-#puts "[Proba_Get_East 1]"
-#puts "size= $s111"
+   puts "<FORM ACTION=\"/cgi-bin/arstan/sg0809-d1.tcl\" METHOD=\"POST\">"
+   #Получаем список файлов, которые соответсвуют координатам
 
-puts "<FORM ACTION=\"/cgi-bin/arstan/sg0809-d1.tcl\" METHOD=\"POST\">"
-#Получаем список файлов, которые соответсвуют координатам
+   set coord-file-list [cfl]
+   set rnd1 [expr rand()]
+   # Определяем количество элементов (вдруг все попадут в выбор)
+   set for_count [Proba_Index_Puts]
+   set boolean_data 0
+   # Создаем таблицу ассоциирующую координаты с именами файлов с данными
 
-set coord-file-list [cfl]
-set rnd1 [expr rand()]
-# Определяем количество элементов (вдруг все попадут в выбор)
-set for_count [Proba_Index_Puts]
-# Создаем таблицу ассоциирующую координаты с именами файлов с данными
-
-puts "<table border = '1'> "
-for {set x 1} {$x<=$for_count} {incr x} {
-   if { $cgi(p1) >= [Proba_Get_North $x]  } {
-      if { $cgi(p2) <= [Proba_Get_East $x]  } {
-         # Вывалим имя файла и остальное
-         puts "<tr>"
-         puts "<td>[Proba_File_ID $x]</td>"
-         puts "<td>[Proba_Get_North $x]</td>"
-         puts "<td>[Proba_Get_East $x]</td>"
-         puts "<td>[Proba_Get_Alt $x]</td>"
-         #puts "<tr> <td>russ190.rwl</td>  <td>[expr rand()]</td> <td>[expr rand()]</td></tr>"
-         puts "</tr>"
+   puts "<table border = '1'> "
+   for {set x 1} {$x<=$for_count} {incr x} {
+      if {   [Proba_Get_North $x] >= $cgi(p1)  } {
+         if {  [Proba_Get_North $x] <= $cgi(p11)  } {
+            if {   [Proba_Get_East $x] >= $cgi(p2)  } {
+               if {  [Proba_Get_East $x] <= $cgi(p22)  } {
+                  # Вывалим имя файла и остальное
+                  puts "<tr>"
+                  #puts "<td>$x</td>"
+                  puts "<td>[Proba_File_ID $x]</td>"
+                  puts "<td>[Proba_Get_North $x]</td>"
+                  puts "<td>[Proba_Get_East $x]</td>"
+                  puts "<td>[Proba_Get_Alt $x]</td>"
+                  #puts "<tr> <td>russ190.rwl</td>  <td>[expr rand()]</td> <td>[expr rand()]</td></tr>"
+                  puts "<td>[checking_falling_numbers_in_the_range [Proba_Get_North $x] [Proba_Get_East $x] $cgi(p1) $cgi(p11) $cgi(p2) $cgi(p22)]</td>"
+                  puts "</tr>"
+                  set boolean_data  1
+               }
+            }
          }
-    } 
-    #else { puts "Нет данных для расчета из вашего диапазона" }
-}
-puts "</table><p>"
+      } 
+   }
+   # Проверим булеву переменную на наличие попадания в диапазо присутствующий в базе. 
+   if {$boolean_data == 0} {
+      puts "Для вашего диапазона нет данных!!!"
+   }
+   puts "</table><p>"
 
-# Создаем список с именами файлов с данными
-puts "В ваш выбор попали несколько файлов - выберите один из списка.<p>"
-puts "<select name='vpl' > "
-for {set x 1} {$x<=$for_count} {incr x} {
-    puts "<option> [Proba_File_ID $x]"
-}
-puts "</select>"
-puts "<p>"
-puts "<INPUT TYPE=\"submit\" NAME=\"calcarstan\" VALUE=\"Провести расчет\">"
-puts "</FORM>"
+   # Создаем список с именами файлов с данными
+   puts "В ваш выбор попали несколько файлов - выберите один из списка.<p>"
+   puts "<select name='vpl' > "
+   for {set x 1} {$x<=$for_count} {incr x} {
 
+      set var_equ [checking_falling_numbers_in_the_range [Proba_Get_North $x] [Proba_Get_East $x] $cgi(p1) $cgi(p11) $cgi(p2) $cgi(p22)]
+      #puts "<option>1"
+      if { $var_equ == 1 } {
+         puts "<option> [Proba_File_ID $x]"
+      }
+      
+   }
+   puts "</select>"
+   puts "<p>"
+   puts "<INPUT TYPE=\"submit\" NAME=\"calcarstan\" VALUE=\"Провести расчет\">"
+   puts "</FORM>"
+} else {
+   puts "расчет по УЧАСТКАМ<p>" 
+}
 puts "<hr>"
 #Получить текущюю дату в виде строки
 set s1time [clock seconds]
