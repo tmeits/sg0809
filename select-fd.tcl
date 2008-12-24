@@ -15,6 +15,93 @@ exec tclsh "$0"  ${1+"$@"}
 # Это нужно вынести в отдельный файл
 # 
 
+## CREATE TABLE "Uchastky" (
+ #     "FILE" text,
+ #     "NORTH" text,
+ #     "EAST" text,
+ #     "ALT" text,
+ #     "START" integer,
+ #     "END" integer,
+ #     "ID STATION" text,
+ #     "COUNTRY" text
+ # );
+ ##
+ 
+ 
+proc Uch_AddRecord {ID File North East Alt Start End IDSite Country} {
+global  UchID UchFile UchSite UchAlt UchNorth UchEast UchStart UchEnd UchCountry
+   set UchFile($ID) $File
+   set UchNorth($ID) $North
+   set UchEast($ID) $East
+   set UchAlt($ID) $Alt
+   set UchStart($ID) $Start
+   set UchEnd($ID) $End
+   set UchIDSite($ID) $IDSite
+   set UchCountry($ID) $Country
+   set UchID($File) $ID
+}
+
+#INSERT INTO "Uchastky" VALUES ('22200020046', '80.60', '58.00', '22', 19580101, 20001231, 'POLAR_GMO_IM.E.T.KRENKELJ', 'RUS');
+#INSERT INTO "Uchastky" VALUES ('22200020069', '79.50', '77.00', '11', 19451102, 20001231, 'OSTROV_VIZE', 'RUS');
+
+#                  FILE          NORTH EAST  ALT START     END       ID STATION                   COUNTRY
+#Uch_AddRecord 1  22200020046 80.60 58.00 22 19580101 20001231 POLAR_GMO_IM.E.T.KRENKELJ RUS
+#Uch_AddRecord 2  22200020069 79.50 77.00 11 19451102 20001231 OSTROV_VIZE RUS
+
+proc Uch_File {File} {
+   global UchFile UchID
+   set tmpID UchID($File)
+   return $UchFile($tmpID)
+}
+proc Uch_File_ID {ID} {
+   global UchFile 
+   return $UchFile($ID)
+}
+proc Uch_ID {File} {
+   global UchID
+   return $UchID($File)
+}
+# Количество элементов в массиве
+proc Uch_Index_Puts {} {
+   global UchID
+   set tmp1 [array size UchID]
+   #puts $tmp1
+   return $tmp1
+}
+# Элемент NORTH
+proc Uch_Get_North {ID} {
+   global UchNorth
+   return $UchNorth($ID)
+}
+
+# Элемент East
+proc Uch_Get_East {ID} {
+   global UchEast
+   return $UchEast($ID)
+}
+
+# Элемент Alt
+proc Uch_Get_Alt {ID} {
+   global UchAlt
+   return $UchAlt($ID)
+}
+# Таким макаром нужно вставить весь файл подготовленный для базы данных
+#CREATE TABLE proba (
+#    "FILE" text,
+#    "SITE NAME" text,
+#    "ALT" text,
+#    "NORTH" text,
+#    "EAST" text,
+#    "START" integer,
+#    "END" integer,
+#    "SPECIES" text
+#);
+# INSERT INTO proba VALUES ('Russ001.rwl', 'Polar-Urals', '-999', '66.00', '65.00', 1541, 1968, 'LASI');
+# INSERT INTO proba VALUES ('BOL.rwl', NULL, '450', '66.30', '165.40', 1407, 1991, 'LADA');
+
+#Proba_AddRecord 1 Russ001.rwl Polar-Urals -999 66.00 65.00  1541 1968 LASI
+#Proba_AddRecord 2 BOL.rwl     NULL         450 66.30 165.40 1407 1991 LADA
+
 proc Proba_AddRecord {ID File Site Alt North East Start End Species} {
 global  probaID probaFile probaSite probaAlt probaNorth probaEast probaStart probaEnd probaSpecies
    set probaFile($ID) $File
@@ -84,29 +171,9 @@ if { $d1 >= $p1 } {
    } 
    return $boolean_data_ret
 }
-# Таким макаром нужно вставить весь файл подготовленный для базы данных
-#CREATE TABLE proba (
-#    "FILE" text,
-#    "SITE NAME" text,
-#    "ALT" text,
-#    "NORTH" text,
-#    "EAST" text,
-#    "START" integer,
-#    "END" integer,
-#    "SPECIES" text
-#);
-# INSERT INTO proba VALUES ('Russ001.rwl', 'Polar-Urals', '-999', '66.00', '65.00', 1541, 1968, 'LASI');
-# INSERT INTO proba VALUES ('BOL.rwl', NULL, '450', '66.30', '165.40', 1407, 1991, 'LADA');
-
-#Proba_AddRecord 1 Russ001.rwl Polar-Urals -999 66.00 65.00  1541 1968 LASI
-#Proba_AddRecord 2 BOL.rwl     NULL         450 66.30 165.40 1407 1991 LADA
 
 source probadb.tcl
 
-
-#puts "*** Proba_File_ID [Proba_File_ID 1]"
-#puts "*** Proba_File [Proba_File \"Russ001.rwl\"]"
-#puts "*** Proba_ID [Proba_ID Russ001.rwl]"
 
 proc cfl {} {
 return 1;
@@ -133,6 +200,15 @@ puts "<hr>"
 #puts "<INPUT TYPE=\"submit\" NAME=\"proba\" VALUE=\"Провести расчет по ПРОБАМ\"><p>"
 
 puts "<b>Расчет выполняется c данными:</b> <br>СЕВЕР1:$cgi(p1), СЕВЕР2:$cgi(p11), ВОСТОК1:$cgi(p2), ВОСТОК2:$cgi(p22), ВЫСОТА:$cgi(p3)<br> "
+
+# Тестируем функции работы с массивами
+#puts "*** Proba_File_ID [Proba_File_ID 1]"
+#puts "*** Proba_File [Proba_File \"Russ001.rwl\"]"
+#puts "*** Proba_ID [Proba_ID Russ001.rwl]"
+
+puts "*** Uch_File_ID [Uch_File_ID 1] <br>"
+puts "*** Uch_File_ID end [Uch_File_ID [Uch_Index_Puts]] <br>"
+
 if { $cgi(mr)==0 } { 
    puts "расчет по ПРОБАМ<p>" 
    #puts "[Proba_Index_Puts]"
@@ -187,7 +263,7 @@ if { $cgi(mr)==0 } {
       set var_equ [checking_falling_numbers_in_the_range [Proba_Get_North $x] [Proba_Get_East $x] $cgi(p1) $cgi(p11) $cgi(p2) $cgi(p22)]
       #puts "<option>1"
       if { $var_equ == 1 } {
-         puts "<option> [Proba_File_ID $x]"
+            puts "<option> [Proba_File_ID $x]"
       }
       
    }
@@ -197,6 +273,7 @@ if { $cgi(mr)==0 } {
    puts "</FORM>"
 } else {
    puts "расчет по УЧАСТКАМ<p>" 
+   #
 }
 puts "<hr>"
 #Получить текущюю дату в виде строки
