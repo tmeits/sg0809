@@ -206,8 +206,8 @@ puts "<b>Расчет выполняется c данными:</b> <br>СЕВЕ�
 #puts "*** Proba_File [Proba_File \"Russ001.rwl\"]"
 #puts "*** Proba_ID [Proba_ID Russ001.rwl]"
 
-puts "*** Uch_File_ID [Uch_File_ID 1] <br>"
-puts "*** Uch_File_ID end [Uch_File_ID [Uch_Index_Puts]] <br>"
+#puts "*** Uch_File_ID [Uch_File_ID 1] <br>"
+#puts "*** Uch_File_ID end [Uch_File_ID [Uch_Index_Puts]] <br>"
 
 if { $cgi(mr)==0 } { 
    puts "расчет по ПРОБАМ<p>" 
@@ -272,7 +272,7 @@ if { $cgi(mr)==0 } {
    puts "<INPUT TYPE=\"submit\" NAME=\"calcarstan\" VALUE=\"Провести расчет\">"
    puts "</FORM>"
 } else {
-   puts "расчет по УЧАСТКАМ<p>" 
+   puts "расчет по УЧАСТКАМ<p>"
    #
 }
 puts "<hr>"
