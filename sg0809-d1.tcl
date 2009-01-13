@@ -94,17 +94,17 @@ if ![catch {exec cmd.exe /c copy /y /a $copydatafileyux {C:\TCLHTTPD3.5.1\htdocs
  puts "<br> Ошибка копирования файла ilynvars.crn !\n"
 }
 
-puts "<FORM ACTION=http://192.168.10.3:8015/cgi-bin/arstan/s-yux.tcl METHOD=POST>"
+puts "<FORM ACTION=\"s-yux.tcl\" METHOD=POST>"
 puts "<INPUT TYPE=\"submit\" NAME=\"calcyux\" VALUE=\"Провести расчет YUX\">"
 puts "</FORM>"
 puts "<hr>"
-puts "<br><a href='http://192.168.10.3:8015/sd0809/arstan/rez/'>Загрузить результат</a>\n"
-puts "<br><a href='http://192.168.10.3:8015/cgi-bin/arstan/index.tcl'>Повторить</a>\n<p>"
+puts "<br><a href=\"http://firewall.kgtei.ru:8015/sd0809/arstan/rez/\">Загрузить результат</a>\n"
+puts "<br><a href=\"index.tcl\">Повторить</a>\n<p>"
 #Получить текущюю дату в виде строки
 set s1time [clock seconds]
 set st [clock format $s1time]
 puts "Page Generated: $st am EDT by ilynva"
-puts "<br>Please see the <a href=\"/sd0809/arstan/contact.html\">Contact Page</a> if you have questions or comments."
+puts "<br>Please see the <a href=\"sd0809/arstan/contact.html\">Contact Page</a> if you have questions or comments."
 #flush ""
 
 Cgi_Tail

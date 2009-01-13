@@ -49,7 +49,25 @@ puts "</select>"
 puts "</td>"
 #puts "<td>по ПРОБАМ (0) по УЧАСТКАМ (1):  </td><td><INPUT TYPE=\"text\" NAME=\"p4\" value=0 SIZE=\"8\"></td>"
 puts "</td>"
+puts "</tr>"
+#
 
+puts "<td>Расчитать стандартную хронологию (0)<br> Расчитать функцию отклика (1)<br> Провести модельные расчеты на основе VS-модели (2)</td><td>"
+puts "<select name='varcalc' size=1> "
+puts "<option>0"
+puts "<option>1"
+puts "<option>2"
+puts "</select>"
+puts "</td>"
+#
+
+puts "<td>Выводить отладочную информацию ДА (0)/ НЕТ(1)</td><td>"
+puts "<select name='deb' size=1> "
+puts "<option>0"
+puts "<option>1"
+puts "</select>"
+puts "</td>"
+puts "</tr>"
 puts "</table>"
 
 

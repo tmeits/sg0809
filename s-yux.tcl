@@ -62,8 +62,8 @@ if ![catch {exec cmd.exe /c copy /y /a  {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\
 #set file [file normalize $file]\n"
 #puts "<img src=tayga.jpg> <br>"
 puts "<br> Выполнение успешно завершенно!!!\n<br><hr>"
-puts "<br><a href='http://192.168.10.3:8015/sd0809/arstan/rez/'>Загрузить результат</a>\n"
-puts "<br><a href='http://192.168.10.3:8015/cgi-bin/arstan/index.tcl'>Повторить</a>\n<br><hr>"
+puts "<br><a href='http://firewall.kgtei.ru:8015/sd0809/arstan/rez/'>Загрузить результат</a>\n"
+puts "<br><a href='index.tcl'>Повторить</a>\n<br><hr>"
 
 #Получить текущюю дату в виде строки
 set s1time [clock seconds]
