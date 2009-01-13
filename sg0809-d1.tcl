@@ -14,6 +14,18 @@ exec tclsh "$0"  ${1+"$@"}
 set dir [file dirname [info script]]
 lappend auto_path $dir [file join $dir ../../cgi-bin]
 
+# Отладочная переменная (1 есть вывод!)
+set d_vid 0
+
+# Печать отладочной информации
+proc d_puts {d_string} {
+ global d_vid
+ if { $d_vid == 1 } {
+  puts $d_string
+ } else {
+  return 
+ }
+}
 
 Cgi_Parse
 
@@ -23,21 +35,22 @@ Content-Type: text/html; charset=windows-1251
 Expires: 0
 Pragma: no-cache\n"
 
-puts "<h1>Выполняется sg0809-d1.tcl</h1>"
-puts "<pre>$errorInfo</pre>"
-puts "Печатем авто-путь (нужно для отладки)<br>"
-puts $auto_path
+#puts "<h1>Выполняется sg0809-d1.tcl</h1>"
+puts "<h2>Интерактивная дендроклиматическая система</h2>"
+d_puts "<pre>$errorInfo</pre>"
+d_puts "Печатем авто-путь (нужно для отладки)<br>"
+d_puts $auto_path
 
 # Удаляем файлы результатов предыдущих запусков скрипта 
 if ![catch {exec cmd.exe /c del {C:\TCLHTTPD3.5.1\htdocs\arstan\rez\ilynva*.*}}] {
-  puts "<br>OK\n"
+  d_puts "<br>OK\n"
 } else {
- puts "<br> Удалять нечего!\n"
+ d_puts "<br> Удалять нечего!\n"
  }
 if ![catch {exec cmd.exe /c del {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\zz*.*}}] {
- puts "OK\n"
+ d_puts "OK\n"
 } else {
- puts "<br> Удалять нечего!\n"
+ d_puts "<br> Удалять нечего!\n"
 }
 
 #На данный момент выбор файла пользователя представлен сриском из которого он делает выбор
@@ -47,7 +60,8 @@ puts "<h4>Расчет выполняется c данными $cgi(vpl)!!!! Ж�
 set copydatafile1 {C:\TCLHTTPD3.5.1\htdocs\sd0809\arstan\dat}
 set copydatafile2 "$cgi(vpl)"
 set copydatafile "$copydatafile1\\$copydatafile2"
-puts $copydatafile
+
+d_puts $copydatafile
 
 #Копируем файл данных
 if ![catch {exec cmd.exe /c copy /y /a $copydatafile {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\sg0809-dd.rwl}}] {
@@ -61,21 +75,21 @@ exec tclsh.exe {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\arstan.tcl} 1 sg0809-dd.r
 exec cmd.exe /c copy /y /a {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\ilynva*.*} {C:\TCLHTTPD3.5.1\htdocs\sd0809\arstan\rez\*.*}
 
 if ![catch {exec cmd.exe /c del {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\ilynva*.*}}] {
-  puts "<br>OK\n"
+  d_puts "<br>OK\n"
 } else {
- puts "<br> Удалять нечего!\n"
+ d_puts "<br> Удалять нечего!\n"
  }
 if ![catch {exec cmd.exe /c del {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan\zz*.*}}] {
- puts "OK\n"
+ d_puts "OK\n"
 } else {
- puts "<br> Удалять нечего!\n"
+ d_puts "<br> Удалять нечего!\n"
 }
 
 puts "<br><h4> Выполнение успешно завершенно!!!</h4>\n<br><hr>"
 # Копируем файл данных для yux.exec
 set copydatafileyux {C:\TCLHTTPD3.5.1\htdocs\sd0809\arstan\rez\ilynvars.crn}
 if ![catch {exec cmd.exe /c copy /y /a $copydatafileyux {C:\TCLHTTPD3.5.1\htdocs\cgi-bin\arstan}}] {
- puts "<br>Файл данных ilynvars.crn подготовлен для расчета программой YUX...\n"
+ puts "<br>Файл данных ilynvars.crn подготовлен для расчета программой YUX...\n<p>"
 } else {
  puts "<br> Ошибка копирования файла ilynvars.crn !\n"
 }
@@ -85,7 +99,12 @@ puts "<INPUT TYPE=\"submit\" NAME=\"calcyux\" VALUE=\"Провести расч�
 puts "</FORM>"
 puts "<hr>"
 puts "<br><a href='http://192.168.10.3:8015/sd0809/arstan/rez/'>Загрузить результат</a>\n"
-puts "<br><a href='http://192.168.10.3:8015/sd0809/arstan/arstan.html'>Повторить</a>\n"
+puts "<br><a href='http://192.168.10.3:8015/cgi-bin/arstan/index.tcl'>Повторить</a>\n<p>"
+#Получить текущюю дату в виде строки
+set s1time [clock seconds]
+set st [clock format $s1time]
+puts "Page Generated: $st am EDT by ilynva"
+puts "<br>Please see the <a href=\"/sd0809/arstan/contact.html\">Contact Page</a> if you have questions or comments."
 #flush ""
 
 Cgi_Tail
