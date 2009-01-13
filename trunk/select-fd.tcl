@@ -209,6 +209,18 @@ puts "<b>Расчет выполняется c данными:</b> <br>СЕВЕ�
 #puts "*** Uch_File_ID [Uch_File_ID 1] <br>"
 #puts "*** Uch_File_ID end [Uch_File_ID [Uch_Index_Puts]] <br>"
 
+# Определим тип расчета
+
+if { $cgi(deb) == 0 } {
+   set d_vid 0 
+} else {
+   set d_vid 1
+}
+
+if { $cgi(varcalc) == 0 } {
+
+puts "d_vid= $d_vid<br>"
+
 if { $cgi(mr)==0 } { 
    puts "расчет по ПРОБАМ<p>" 
    #puts "[Proba_Index_Puts]"
@@ -269,11 +281,15 @@ if { $cgi(mr)==0 } {
    }
    puts "</select>"
    puts "<p>"
-   puts "<INPUT TYPE=\"submit\" NAME=\"calcarstan\" VALUE=\"Провести расчет\">"
+   puts "<INPUT TYPE=\"submit\" NAME=\"calcarstan\" VALUE=\"Расчитать стандартную хронологию\">"
    puts "</FORM>"
 } else {
-   puts "расчет по УЧАСТКАМ<p>"
+   puts "<font color=\"red\" size=+1><p>расчет по УЧАСТКАМ Будет реализован в дальнейшем!!!</font>"
    #
+}
+
+} else {
+   puts "<p><font color=\"red\" size=+1> Другие виды расчета  будут реализованы в дальнейшем!!!</font><p>"
 }
 puts "<hr>"
 #Получить текущюю дату в виде строки
