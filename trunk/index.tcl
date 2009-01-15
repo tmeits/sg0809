@@ -29,7 +29,8 @@ puts "<hr>"
 puts "<FORM ACTION=\"/cgi-bin/arstan/select-fd.tcl\" METHOD=\"POST\">"
 #Получаем координатам
 puts "<INPUT TYPE=\"submit\" NAME=\"uchastok\" VALUE=\"Начать поиск\">" 
-puts "<INPUT TYPE=\"reset\" NAME=\"proba\" VALUE=\"Очистить форму\"><p>"
+puts "<INPUT TYPE=\"reset\" NAME=\"proba\" VALUE=\"Очистить форму\">"
+puts "<a href='http://firewall.kgtei.ru:8015/sd0809/arstan/Dendro_system_discr.pdf'>Помощь</a><p>"
 # Создаем таблицу ассоциирующую координаты с именами файлов с данными
 puts "<table border = '1'> "
 
