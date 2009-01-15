@@ -1,27 +1,145 @@
+login as: ilynva
+ilynva@192.168.10.16's password:
+Last login: Thu Jan 15 09:20:01 2009 from 192.168.10.3
+[ilynva@edu ~]$ su
+Password:
+[root@edu ilynva]# cd /var/www/html/sg0809/
+[root@edu sg0809]# ls
+arstan.html  call-arstan.sh  info.html  register.html  tcl-powered.gif
+arstan.php   index.html      login.php  register.php
+[root@edu sg0809]# vim index.html
+
+<tr>
+  <td>Введите имя пользователя: </td>
+  <td><INPUT TYPE="text" NAME="p1"   SIZE="15"></td>
+</tr>
+<tr>
+  <td>Введите пароль: </td>
+   <td><INPUT TYPE="password" NAME="p11"  SIZE="15"></td>
+</tr>
+</table>
+</FORM>
+</td><td>
+<img src=http://sg0809.googlecode.com/files/di.jpg><br>
+<a href=http://sg0809.googlecode.com/files/d1b.jpg>Посмотреть увеличенное изображение</a>
+</td>
+<td>
+<img src=http://sg0809.googlecode.com/files/r1.JPG>
+<td>
+</tr>
+</table>
+Онлайн консультант ICQ UIN:<b>447522763</b>
+<hr>
+Спроектированная информационная система включает в себя обновляемую
+реляционную базу дендрохронологической и климатической информации на базе
+PostgreSQL технологий (см. Рис. ниже), а также специальные алгоритмы по обработке дендроклиматической информации, позволяющие вести комплексных анализ
+дендрохронологических и климатических данных, а именно:
+<ul>
+<li> <b>строить</b> стандартные древесно-кольцевые хронологии (Cook, Kairiukstis, 1989);
+<li>  <b>анализировать</b> функции отклика древесных растений на изменение
+климатических факторов (Ваганов и др., Fritts, 1976);
+<li>  <b>моделировать</b> годичный прирост деревьев по ведущим климатическим факторам
+на основе VS-модели (Ваганов, Шашкин, 2002; Vaganov et al., 2006);
+<li>  <b>рассчитывать</b> различные скользящие характеристики годичных колец на основе
+непараметрических статистик (Шишов, Ивановский, 2006; Briffa et al., 2008);
+<li> <b>проводить</b> пространственную экстраполяцию полученных результатов на
+анализируемое географическое пространство (Шишов и др., 2002; 2007)
+</ul>
+<p>
+Для начала работы с системой необходимо <b><i>зарегистрироваться</i></b>, заполнив
+предложенную форму, и получить логин и пароль у администратора.
+
+</body>
+</html>
+
 <html>
 <HEAD>
 <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
 </HEAD>
 <body>
-<h3>Интерактивная дендроклиматическая система</h3>
+<h3>Интерактивная система дендроклиматического мониторинга</h3>
 <hr>
-<FORM ACTION="login.php" METHOD="POST">
-<INPUT TYPE="submit" NAME="gologin" VALUE="Войти в систему">
-<INPUT TYPE="reset" NAME="goclear" VALUE="Очистить форму"><p>
-
+<FORM ACTION="register.php" METHOD="POST">
+<INPUT TYPE="submit" NAME="goreg" VALUE="Регистрация">
+<INPUT TYPE="reset" NAME="goclear" VALUE="Очистить форму">
+<p>
 <table border = '1'>
 
 <tr>
-<td>Введите имя пользователя: </td><td><INPUT TYPE="text" NAME="p1"   SIZE="15"></td>
-<td>Введите пароль: </td><td><INPUT TYPE="password" NAME="p11"  SIZE="15"></td>
+<td>Введите имя пользователя (логин): </td>
+ <td><INPUT TYPE="text" NAME="pn"   SIZE="80"></td>
+</tr><tr>
+<td>Ваш e-mail:</td><td><INPUT TYPE="text" NAME="pm"   SIZE="80"></td>
+</tr><tr>
+<td>Введите пароль: </td>
+<td><INPUT TYPE="password" NAME="pp"  SIZE="80"></td>
+</tr><tr>
+<td>Введите коментарий: </td>
+  <td><INPUT TYPE="text" NAME="pc"  SIZE="80"></td>
 </tr>
-</td>
-
+</tr><tr>
+<td>Место работы: </td>
+  <td><INPUT TYPE="text" NAME="pw"  SIZE="80"></td>
+</tr><tr>
+<td>Адрес: </td>
+  <td><INPUT TYPE="text" NAME="pw"  SIZE="80"></td>
+</tr>
 </table>
 </FORM>
-
+<font color=\"red\" size=+1><p>* Для логина и пароля используйте латинские символы!</font>
 <hr>
-Please see the <b>Contact Page</b> if you have questions or comments.
-<br>Онлайн консультант ICQ UIN:<b>447522763</b>
+Онлайн консультант ICQ UIN:<b>447522763</b>
 </body>
 </html>
+
+login as: ilynva
+ilynva@192.168.10.16's password:
+Last login: Thu Jan 15 09:20:01 2009 from 192.168.10.3
+[ilynva@edu ~]$ su
+Password:
+[root@edu ilynva]# cd /var/www/html/sg0809/
+[root@edu sg0809]# ls
+arstan.html  call-arstan.sh  info.html  register.html  tcl-powered.gif
+arstan.php   index.html      login.php  register.php
+[root@edu sg0809]# vim index.html
+[root@edu sg0809]# ls
+arstan.html  arstan.php  call-arstan.sh  index.html  info.html  login.php  register.html  register.php  tcl-powered.gif
+[root@edu sg0809]# vim register.html
+[root@edu sg0809]# vim register.php
+<HTML>
+<HEAD>
+<TITLE>SG0809</TITLE>
+<!Doctype HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<!-- Author: ilynva
+ ilynva@
+ 05.01.2009
+ -->
+<META HTTP-Equiv=Editor Content="kgtei labs">
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+</HEAD>
+<BODY>
+<?php
+
+echo "<h4>Интерактивная дендроклиматическая система</h4>";
+echo "<hr>";
+#
+#echo "$_POST[p1], $_POST[p11]";
+
+$res=exec("/bin/mail -s REG-SG0809:NAME[$_POST[pn]]:MAIL[$_POST[pm]]:PASSWORD[$_POST[pp]]:COMMENT[$_POST[pc]]  ilynva@ ",$sa,$sr);
+$res=exec("/bin/mail -s REG-SG0809:NAME[$_POST[pn]]:MAIL[$_POST[pm]]:PASSWORD[$_POST[pp]]:COMMENT[$_POST[pc]]  p_tasha85@ ",$sa,$sr);
+$res=exec("/bin/mail -s REG-SG0809:NAME[$_POST[pn]]:MAIL[$_POST[pm]]:PASSWORD[$_POST[pp]]:COMMENT[$_POST[pc]]  shishov@ ",$sa,$sr);
+
+
+
+echo "$sa";
+
+
+
+echo "<p><b>Ваши данные отправленны администратору!!! Вам на мэйл придет сообщение о вашей регистрации.</b></p>";
+
+echo "<a href=index.html>Вернуться на стартовую страницу</a>";
+echo "<hr>";
+echo "Please see the Contact Page if you have questions or comments.";
+?>
+</BODY>
+</HTML>
