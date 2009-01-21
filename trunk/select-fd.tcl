@@ -8,7 +8,7 @@ exec tclsh "$0"  ${1+"$@"}
 # Usage:
 #	tclsh select-fd.tcl
 #	ilynva@ на гугле
-#	12.11.2008
+#	12.01.2009
 #
 
 # Моделируем базу данных с помощью массива
@@ -27,7 +27,8 @@ exec tclsh "$0"  ${1+"$@"}
  # );
  ##
  
- 
+#Структура эмулированной базы данных
+
 proc Uch_AddRecord {ID File North East Alt Start End IDSite Country} {
 global  UchID UchFile UchSite UchAlt UchNorth UchEast UchStart UchEnd UchCountry
    set UchFile($ID) $File
